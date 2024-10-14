@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/sir-dr-edwin/static/css/main.769a758e.css",
-    "main.js": "/sir-dr-edwin/static/js/main.80ce5f31.js",
+    "main.css": "/sir-dr-edwin/static/css/main.cc2aced0.css",
+    "main.js": "/sir-dr-edwin/static/js/main.6aa36c81.js",
     "index.html": "/sir-dr-edwin/index.html",
-    "main.769a758e.css.map": "/sir-dr-edwin/static/css/main.769a758e.css.map",
-    "main.80ce5f31.js.map": "/sir-dr-edwin/static/js/main.80ce5f31.js.map"
+    "main.cc2aced0.css.map": "/sir-dr-edwin/static/css/main.cc2aced0.css.map",
+    "main.6aa36c81.js.map": "/sir-dr-edwin/static/js/main.6aa36c81.js.map"
   },
   "entrypoints": [
-    "static/css/main.769a758e.css",
-    "static/js/main.80ce5f31.js"
+    "static/css/main.cc2aced0.css",
+    "static/js/main.6aa36c81.js"
   ]
 }
