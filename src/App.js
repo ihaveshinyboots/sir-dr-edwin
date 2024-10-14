@@ -125,38 +125,6 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="search-container">
-        <input
-          type="text"
-          value={searchVal}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          placeholder="Enter postal code"
-          className="search-input"
-        />
-        <FaSearch className="search-icon" onClick={handleSearchClick} />
-      </div>
-      <div className="slider-container">
-        <label htmlFor="distance-slider">Distance: {distance} meters</label>
-        <Slider
-          id="distance-slider"
-          min={0}
-          max={3000}
-          value={distance}
-          onChange={handleSliderChange}
-          railStyle={{ backgroundColor: '#d3d3d3' }}
-          trackStyle={{ backgroundColor: '#007bff' }}
-          handleStyle={{
-            borderColor: '#007bff',
-            height: 24,
-            width: 24,
-            marginLeft: -12,
-            marginTop: -10,
-            backgroundColor: '#fff',
-          }}
-          style={{ width: '100%' }} // Set the width to 100% to match the container
-        />
-      </div>
       <MapContainer center={[1.3521, 103.8198]} zoom={13} className="map-container">
         <TileLayer
           url="https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png"
@@ -177,7 +145,8 @@ const App = () => {
           return (
             <Marker key={index} position={[latitude, longitude]} icon={customIconRed}>
               <Popup>
-                {location.address}
+              {location.address}, 
+              {location.hours}
               </Popup>
             </Marker>
           );
@@ -191,6 +160,40 @@ const App = () => {
         )}
         <ZoomToMarkers markers={filteredLocations.concat(searchMarker ? [searchMarker] : [])} />
       </MapContainer>
+      <div className="controls">
+        <div className="search-container">
+          <input
+            type="text"
+            value={searchVal}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+            placeholder="Enter postal code"
+            className="search-input"
+          />
+          <FaSearch className="search-icon" onClick={handleSearchClick} />
+        </div>
+        <div className="slider-container">
+          <label htmlFor="distance-slider">Distance: {distance} meters</label>
+          <Slider
+            id="distance-slider"
+            min={0}
+            max={3000}
+            value={distance}
+            onChange={handleSliderChange}
+            railStyle={{ backgroundColor: '#d3d3d3' }}
+            trackStyle={{ backgroundColor: '#007bff' }}
+            handleStyle={{
+              borderColor: '#007bff',
+              height: 24,
+              width: 24,
+              marginLeft: -12,
+              marginTop: -10,
+              backgroundColor: '#fff',
+            }}
+            style={{ width: '100%' }} // Set the width to 100% to match the container
+          />
+        </div>
+      </div>
     </div>
   );
 };
