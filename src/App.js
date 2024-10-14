@@ -3,18 +3,31 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Papa from 'papaparse';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { FaSearch } from 'react-icons/fa'; // Import search icon
 import L from 'leaflet'; // Import Leaflet
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css'; // Import rc-slider CSS
 
+const ZoomToMarkers = ({ markers }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (markers.length === 0) return;
+
+    const bounds = L.latLngBounds(markers.map(marker => [marker.latitude, marker.longitude]));
+    map.fitBounds(bounds);
+  }, [markers, map]);
+
+  return null;
+};
+
 const App = () => {
   const [searchVal, setSearchVal] = useState('');
   const [locations, setLocations] = useState([]);
   const [filteredLocations, setFilteredLocations] = useState([]);
-  const [markers, setMarkers] = useState([]);
-  const [distance, setDistance] = useState(10000); // Distance in meters
+  const [searchMarker, setSearchMarker] = useState(null);
+  const [distance, setDistance] = useState(3000); // Distance in meters
   const [searchLocation, setSearchLocation] = useState(null); // Store the search location
 
   useEffect(() => {
@@ -66,8 +79,8 @@ const App = () => {
           longitude: parseFloat(result.LONGITUDE),
           address: result.ADDRESS
         };
-        setMarkers([searchLocation]);
         setSearchLocation(searchLocation);
+        setSearchMarker(searchLocation); // Update search marker
         filterLocations(searchLocation, distance);
       } else {
         console.error('No results found');
@@ -169,13 +182,14 @@ const App = () => {
             </Marker>
           );
         })}
-        {markers.map((marker, index) => (
-          <Marker key={index} position={[marker.latitude, marker.longitude]} icon={customIconBlue}>
+        {searchMarker && (
+          <Marker position={[searchMarker.latitude, searchMarker.longitude]} icon={customIconBlue}>
             <Popup>
-              {marker.address}
+              {searchMarker.address}
             </Popup>
           </Marker>
-        ))}
+        )}
+        <ZoomToMarkers markers={filteredLocations.concat(searchMarker ? [searchMarker] : [])} />
       </MapContainer>
     </div>
   );
