@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     // Load the CSV file on load
-    const csvPath = 'https://github.com/ihaveshinyboots/sir-dr-edwin/blob/master/public/locations.csv'; // Change this to an online path if needed
+    const csvPath = 'https://raw.githubusercontent.com/ihaveshinyboots/sir-dr-edwin/refs/heads/gh-pages/locations.csv'; // Change this to an online path if needed
     fetch(csvPath)
       .then(response => response.text())
       .then(csvText => {
@@ -97,21 +97,21 @@ const App = () => {
 
   // Create custom icons
   const customIconRed = L.icon({
-    iconUrl: 'https://github.com/ihaveshinyboots/sir-dr-edwin/blob/master/public/marker.svg', // Path to your custom red SVG icon
+    iconUrl: 'https://raw.githubusercontent.com/ihaveshinyboots/sir-dr-edwin/refs/heads/gh-pages/marker.svg', // Path to your custom red SVG icon
     iconSize: [25, 41], // Size of the icon
     iconAnchor: [12, 41], // Point of the icon which will correspond to marker's location
     popupAnchor: [1, -34], // Point from which the popup should open relative to the iconAnchor
   });
 
   const customIconBlue = L.icon({
-    iconUrl: 'https://github.com/ihaveshinyboots/sir-dr-edwin/blob/master/public/blue-marker.svg', // Path to your custom blue SVG icon
+    iconUrl: 'https://raw.githubusercontent.com/ihaveshinyboots/sir-dr-edwin/refs/heads/gh-pages/blue-marker.svg', // Path to your custom blue SVG icon
     iconSize: [25, 41], // Size of the icon
     iconAnchor: [12, 41], // Point of the icon which will correspond to marker's location
     popupAnchor: [1, -34], // Point from which the popup should open relative to the iconAnchor
   });
 
   return (
-    <div>
+    <div className="App">
       <div className="search-container">
         <input
           type="text"
@@ -128,7 +128,7 @@ const App = () => {
         <Slider
           id="distance-slider"
           min={0}
-          max={10000}
+          max={3000}
           value={distance}
           onChange={handleSliderChange}
           railStyle={{ backgroundColor: '#d3d3d3' }}
@@ -144,7 +144,7 @@ const App = () => {
           style={{ width: '100%' }} // Set the width to 100% to match the container
         />
       </div>
-      <MapContainer center={[1.3521, 103.8198]} zoom={13} style={{ height: '90vh', width: '100%' }}>
+      <MapContainer center={[1.3521, 103.8198]} zoom={13} className="map-container">
         <TileLayer
           url="https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png"
           detectRetina={true}

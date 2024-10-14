@@ -1,4 +1,13 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
 
@@ -17,11 +26,30 @@
   color: #61dafb;
 }
 
+.map-container {
+  flex-grow: 1;
+  height: 100vh; /* Full height */
+}
+
+.controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000; /* Ensure controls are on top of the map */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .search-container {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 20px;
+  background: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .search-input {
@@ -46,6 +74,10 @@
   width: 300px; /* Set the width to match the search input */
   margin-left: auto;
   margin-right: auto;
+  background: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #distance-slider {
